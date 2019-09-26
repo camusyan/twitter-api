@@ -16,6 +16,14 @@ class TestTweetViews(TestCase):
         db.session.remove()
         db.drop_all()
 
+    def test_tweet_all(self):
+        self.client.post("/tweets", json={'text': 'New tweet 1'})
+        self.client.post("/tweets", json={'text': 'New tweet 2'})
+        self.client.post("/tweets", json={'text': 'New tweet 3'})
+        response = self.client.get("/tweets")
+        print(response, flush=True)
+
+
     def test_tweet_show(self):
         first_tweet = Tweet(text="First tweet")
         db.session.add(first_tweet)
