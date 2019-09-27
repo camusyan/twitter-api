@@ -1,5 +1,5 @@
 from flask_restplus import Namespace, Resource, fields
-from flask import abort, json
+from flask import abort, json, jsonify
 from app.models import Tweet
 from app import db
 
@@ -65,4 +65,4 @@ class TweetsResource(Resource):
     def get(self):
         tweets = db.session.query(Tweet).all()
         print(tweets, flush=True)
-        return json.dumps(tweets), 200
+        return tweets, 200
